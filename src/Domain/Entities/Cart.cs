@@ -9,6 +9,5 @@ namespace Domain.Entities;
 public class Cart : BaseEntity
 {
     public int Id { get; set; }
-    public int CustomerId { get; set; }
     public List<CartProduct> Products { get; set; }
 }

@@ -8,7 +8,7 @@ namespace Domain.Entities;
 
 
 /// <summary>
-/// Represents a user in the system with authentication and profile information.
+/// Represents a salerecord in the system with authentication and profile information.
 /// This entity follows domain-driven design principles and includes business rules validation.
 /// </summary>
 public class SaleRecord : BaseEntity, ISaleRecord
@@ -26,7 +26,7 @@ public class SaleRecord : BaseEntity, ISaleRecord
     public DateTime SaleDate { get; set; }
 
     /// <summary>
-    /// Gets the user's phone number.
+    /// Gets the salerecord's phone number.
     /// Must be a valid phone number format following the pattern (XX) XXXXX-XXXX.
     /// </summary>
     public int CustomerId { get; set; }
@@ -39,41 +39,38 @@ public class SaleRecord : BaseEntity, ISaleRecord
     public string Branch { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets the user's role in the system.
-    /// Determines the user's permissions and access levels.
+    /// Gets the salerecord's role in the system.
+    /// Determines the salerecord's permissions and access levels.
     /// </summary>
     public Cart Cart { get; set; } = new Cart();
 
     /// <summary>
-    /// Gets the date and time when the user was created.
+    /// Gets the date and time when the salerecord was created.
     /// </summary>
     public DateTime CreatedAt { get; set; }
 
     /// <summary>
-    /// Gets the date and time of the last update to the user's information.
+    /// Gets the date and time of the last update to the salerecord's information.
     /// </summary>
     public DateTime? UpdatedAt { get; set; }
 
     public SaleStatus Status { get; set; } = SaleStatus.Active;
 
     /// <summary>
-    /// Gets the unique identifier of the user.
+    /// Gets the unique identifier of the salerecord.
     /// </summary>
-    /// <returns>The user's ID as a string.</returns>
+    /// <returns>The salerecord's ID as a string.</returns>
     string ISaleRecord.Id => Id.ToString();
 
     /// <summary>
-    /// Gets the username.
+    /// Gets the SaleNumber.
     /// </summary>
-    /// <returns>The username.</returns>
-    // string ISaleRecord.Sa => Username;
+    /// <returns>The SaleNumber.</returns>
+    // string ISaleRecord.Sa => SaleNumber;
     int ISaleRecord.SaleNumber => SaleNumber;
 
-
-    public DateTime Date => throw new NotImplementedException();
-
     /// <summary>
-    /// Initializes a new instance of the User class.
+    /// Initializes a new instance of the Sale class.
     /// </summary>
     public SaleRecord()
     {
@@ -82,7 +79,7 @@ public class SaleRecord : BaseEntity, ISaleRecord
     }
 
     /// <summary>
-    /// Performs validation of the user entity using the UserValidator rules.
+    /// Performs validation of the salerecord entity using the SaleRecordValidator rules.
     /// </summary>
     /// <returns>
     /// A <see cref="ValidationResultDetail"/> containing:
@@ -91,7 +88,7 @@ public class SaleRecord : BaseEntity, ISaleRecord
     /// </returns>
     /// <remarks>
     /// <listheader>The validation includes checking:</listheader>
-    /// <list type="bullet">Username format and length</list>
+    /// <list type="bullet">SaleRecordname format and length</list>
     /// <list type="bullet">Email format</list>
     /// <list type="bullet">Phone number format</list>
     /// <list type="bullet">Password complexity requirements</list>
@@ -110,8 +107,8 @@ public class SaleRecord : BaseEntity, ISaleRecord
     }
 
     /// <summary>
-    /// Activates the user account.
-    /// Changes the user's status to Active.
+    /// Activates the salerecord account.
+    /// Changes the salerecord's status to Active.
     /// </summary>
     public void Activate()
     {
@@ -120,8 +117,8 @@ public class SaleRecord : BaseEntity, ISaleRecord
     }
 
     /// <summary>
-    /// Deactivates the user account.
-    /// Changes the user's status to Inactive.
+    /// Deactivates the salerecord account.
+    /// Changes the salerecord's status to Inactive.
     /// </summary>
     public void Deactivate()
     {
