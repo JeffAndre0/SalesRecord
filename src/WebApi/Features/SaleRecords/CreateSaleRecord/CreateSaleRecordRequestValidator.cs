@@ -15,25 +15,25 @@ public class CreateSaleRecordRequestValidator : AbstractValidator<CreateSaleReco
     /// </summary>
     /// <remarks>
     /// Validation rules include:
-    /// - CartProducts: Maximum limit: 20 items per product 
-    /// - CartProducts: Minumum 1 items for product buyed 
+    /// - CartCart: Maximum limit: 20 items per cart 
+    /// - CartCart: Minumum 1 items for cart buyed 
     /// </remarks>
     public CreateSaleRecordRequestValidator()
     {
-        RuleForEach(cart => cart.Cart.Products)
-        .ChildRules(product => 
+        RuleForEach(s => s.Cart)
+        .ChildRules(cart => 
         {
-            product.RuleFor(p => p.Quantity)
+            cart.RuleFor(c => c.Quantity)
             .LessThanOrEqualTo(20)
-            .WithMessage("Maximum limit: 20 items per product.");
+            .WithMessage("Maximum limit: 20 items per cart.");
         });
 
-                RuleForEach(cart => cart.Cart.Products)
-        .ChildRules(product => 
+        RuleForEach(s => s.Cart)
+        .ChildRules(cart => 
         {
-            product.RuleFor(p => p.Quantity)
+            cart.RuleFor(c => c.Quantity)
             .GreaterThan(0)
-            .WithMessage("Minimum of 1 item of this product.");
+            .WithMessage("Minimum of 1 item of this cart.");
         });
     }
 }

@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Domain.Enums;
+﻿using Domain.Enums;
 
 namespace WebApi.Features.SaleRecord.CreateSaleRecord;
 
@@ -37,7 +36,7 @@ public class CreateSaleRecordRequest
     /// Gets the user's role in the system.
     /// Determines the user's permissions and access levels.
     /// </summary>
-    public Cart Cart { get; set; } = new Cart();
+    public required List<CreateSaleRecordCartRequest> Cart { get; set; }
 
     public SaleStatus Status { get; set; } = SaleStatus.Active;
 }

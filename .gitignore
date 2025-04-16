@@ -345,7 +345,7 @@ ASALocalRun/
 # NVidia Nsight GPU debugger configuration file
 *.nvsaleRecord
 
-# MFractors (Xamarin productivity tool) working folder
+# MFractors (Xamarin cartivity tool) working folder
 .mfractor/
 
 # Local History for Visual Studio

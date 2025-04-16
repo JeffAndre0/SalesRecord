@@ -43,6 +43,21 @@ public class CreateSaleRecordHandler : IRequestHandler<CreateSaleRecordCommand, 
 
         var salerecord = _mapper.Map<SaleRecord>(command);
 
+        decimal total = 0;
+        for (int c = 0; c < command.Cart.Count; c++)
+        {
+            if (command.Cart[c].Quantity >= 4 && command.Cart[c].Quantity < 10)
+                command.Cart[c].Discount = (decimal)0.1 * command.Cart[c].UnityPrice * command.Cart[c].Quantity;
+            else if (command.Cart[c].Quantity >= 10)
+                command.Cart[c].Discount = (decimal)0.2 * command.Cart[c].UnityPrice * command.Cart[c].Quantity;
+            else
+                command.Cart[c].Discount = 0m;
+            command.Cart[c].TotalAmount = (command.Cart[c].UnityPrice * command.Cart[c].Quantity) - command.Cart[c].Discount;
+            total += command.Cart[c].TotalAmount;
+        }
+        command.TotalAmount = total;
+        if (command.SaleDate == default)
+            command.SaleDate = DateTime.UtcNow;
         var createdSaleRecord = await _salerecordRepository.CreateAsync(salerecord, cancellationToken);
         var result = _mapper.Map<CreateSaleRecordResult>(createdSaleRecord);
         return result;

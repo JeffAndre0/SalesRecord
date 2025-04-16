@@ -4,24 +4,24 @@ using System.Text.RegularExpressions;
 
 namespace Domain.Validation;
 
-public class ProductsValidator : AbstractValidator<SaleRecord>
+public class CartValidator : AbstractValidator<SaleRecord>
 {
-    public ProductsValidator()
+    public CartValidator()
     {
-        RuleForEach(cart => cart.Cart.Products)
-        .ChildRules(product => 
+        RuleForEach(s => s.Cart)
+        .ChildRules(cart => 
         {
-            product.RuleFor(p => p.Quantity)
+            cart.RuleFor(c => c.Quantity)
             .LessThanOrEqualTo(20)
-            .WithMessage("Maximum limit: 20 items per product.");
+            .WithMessage("Maximum limit: 20 items per cart.");
         });
 
-        RuleForEach(cart => cart.Cart.Products)
-        .ChildRules(product => 
+        RuleForEach(s => s.Cart)
+        .ChildRules(cart => 
         {
-            product.RuleFor(p => p.Quantity)
+            cart.RuleFor(c => c.Quantity)
             .GreaterThan(0)
-            .WithMessage("Minimum of 1 item of this product.");
+            .WithMessage("Minimum of 1 item of this cart.");
         });
     }
 

@@ -45,7 +45,6 @@ public class SaleRecordController : BaseController
     {
         var validator = new CreateSaleRecordRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 

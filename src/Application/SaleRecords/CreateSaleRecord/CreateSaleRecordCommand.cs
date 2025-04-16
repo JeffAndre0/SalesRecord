@@ -27,7 +27,7 @@ public class CreateSaleRecordCommand : IRequest<CreateSaleRecordResult>
     /// <summary>
     /// Gets the date and time when the sale was made.
     /// </summary>
-    public DateTime SaleDate { get; set; }
+    public DateTime SaleDate { get; set; } = DateTime.UtcNow;
 
     /// <summary>
     /// Gets the salerecord's phone number.
@@ -46,18 +46,19 @@ public class CreateSaleRecordCommand : IRequest<CreateSaleRecordResult>
     /// Gets the salerecord's role in the system.
     /// Determines the salerecord's permissions and access levels.
     /// </summary>
-    public Cart Cart { get; set; } = new Cart();
+    public List<Cart> Cart { get; set; }
 
     /// <summary>
     /// Gets the date and time when the salerecord was created.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     /// <summary>
     /// Gets the date and time of the last update to the salerecord's information.
     /// </summary>
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
 
     public SaleStatus Status { get; set; } = SaleStatus.Active;
+    public decimal TotalAmount { get; set; }
 
 }

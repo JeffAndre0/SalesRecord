@@ -9,7 +9,6 @@ namespace ORM;
 public class DefaultContext : DbContext
 {
     public DbSet<SaleRecord> SaleRecords { get; set; }
-
     public DefaultContext(DbContextOptions<DefaultContext> options) : base(options)
     {
     }
@@ -17,6 +16,13 @@ public class DefaultContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        
+        modelBuilder.Entity<SaleRecord>()
+        .HasMany(sr => sr.Cart)
+        .WithOne(c => c.SaleRecord)
+        .HasForeignKey(c => c.SaleRecordId)
+        .OnDelete(DeleteBehavior.Cascade);
+
         base.OnModelCreating(modelBuilder);
     }
 }

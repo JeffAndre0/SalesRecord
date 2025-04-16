@@ -7,6 +7,6 @@ public class SaleValidator : AbstractValidator<SaleRecord>
 {
     public SaleValidator()
     {
-        RuleFor(sale => sale).SetValidator(new ProductsValidator());
+        RuleFor(sale => sale).SetValidator(new CartValidator());
     }
 }

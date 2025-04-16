@@ -15,6 +15,8 @@ public class SaleRecordConfiguration : IEntityTypeConfiguration<SaleRecord>
 
         builder.Property(u => u.SaleNumber).IsRequired();
         builder.Property(u => u.SaleDate);
+        builder.Property(u => u.CreatedAt);
+        builder.Property(u => u.UpdatedAt);
         builder.Property(u => u.CustomerId).IsRequired();
         builder.Property(u => u.Branch);
 
