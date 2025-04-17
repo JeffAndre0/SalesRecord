@@ -1,21 +1,13 @@
-using Domain.Common;
-
-namespace Domain.Entities;
-
+namespace Application.Features.SaleRecords.CreateSaleRecord;
 
 /// <summary>
-/// Faker class for Cart
+/// Represents a single cart item in the CreateSaleRecord response.
 /// </summary>
-public class Cart : BaseEntity
+public class CreateCartResponse
 {
-    public Guid Id { get; set; }
     public int ProductId { get; set; }
     public int Quantity { get; set; }
     public decimal UnityPrice { get; set; }
     public decimal Discount { get; set; }
     public decimal TotalAmount { get; set; }
-    public Guid SaleRecordId { get; set; }
-
-    public SaleRecord SaleRecord { get; set; }
-
 }

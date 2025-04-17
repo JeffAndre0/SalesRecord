@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.Features.SaleRecords.CreateSaleRecord;
+using AutoMapper;
 using Domain.Entities;
 
 namespace Application.SaleRecords.CreateSaleRecord;
@@ -13,8 +14,18 @@ public class CreateSaleRecordProfile : Profile
     /// </summary>
     public CreateSaleRecordProfile()
     {
-        CreateMap<CreateSaleRecordCommand, SaleRecord>();
-        CreateMap<SaleRecord, CreateSaleRecordResult>();
+        // CreateMap<CreateSaleRecordCommand, SaleRecord>();
+        // CreateMap<SaleRecord, CreateSaleRecordResult>();
+
+        // CreateMap<Cart, CreateCartResult>();
         
+
+        CreateMap<SaleRecord, CreateSaleRecordResult>();
+        CreateMap<Cart, CreateCartResult>();
+        CreateMap<CreateSaleRecordCommand, SaleRecord>();
+
+        CreateMap<CreateCartResult, CreateCartResult>();
+        CreateMap<CreateSaleRecordResult, CreateSaleRecordResponse>();
+        CreateMap<CreateCartResult, CreateCartResponse>();
     }
 }

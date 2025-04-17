@@ -10,13 +10,12 @@ namespace Application.SaleRecords.CreateSaleRecord;
 /// This response contains the unique identifier of the newly created Sale,
 /// which can be used for subsequent operations or reference.
 /// </remarks>
-public class CreateSaleRecordResult
+public class CreateCartResult
 {
-    public Guid Id { get; set; }
-    public int CustomerId { get; set; }
-    public string Branch { get; set; } = string.Empty;
+    public int ProductId { get; set; }
+    public int Quantity { get; set; }
+    public decimal UnityPrice { get; set; }
+    public decimal Discount { get; set; }
     public decimal TotalAmount { get; set; }
-    public List<CreateCartResult> Cart { get; set; } = new();
-    public int SaleNumber { get; set; }
 
 }

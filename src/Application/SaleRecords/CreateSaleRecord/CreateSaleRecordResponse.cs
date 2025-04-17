@@ -1,8 +1,7 @@
-using Application.Features.SaleRecords.CreateSaleRecord;
 using Domain.Entities;
 using Domain.Enums;
 
-namespace WebApi.Features.SaleRecords.CreateSaleRecord;
+namespace Application.Features.SaleRecords.CreateSaleRecord;
 
 /// <summary>
 /// API response model for CreateSaleRecord operation
