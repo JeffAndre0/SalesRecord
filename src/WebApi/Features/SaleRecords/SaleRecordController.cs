@@ -9,6 +9,9 @@ using Application.SaleRecords.CreateSaleRecord;
 using Application.SaleRecords.GetSaleRecord;
 using Application.SaleRecords.DeleteSaleRecord;
 using WebApi.Features.SaleRecords.CreateSaleRecord;
+using Domain.Enums;
+using System.ComponentModel.DataAnnotations;
+using Application.SaleRecords.UpdateStatus;
 namespace WebApi.Features.SaleRecord;
 
 /// <summary>
@@ -66,7 +69,7 @@ public class SaleRecordController : BaseController
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The salerecord details if found</returns>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(ApiResponseWithData<GetSaleRecordResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponseWithData<SaleRecords.GetSaleRecord.GetSaleRecordResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetSaleRecord([FromRoute] Guid id, CancellationToken cancellationToken)
@@ -81,11 +84,11 @@ public class SaleRecordController : BaseController
         var command = _mapper.Map<GetSaleRecordCommand>(request.Id);
         var response = await _mediator.Send(command, cancellationToken);
 
-        return Ok(new ApiResponseWithData<GetSaleRecordResponse>
+        return Ok(new ApiResponseWithData<SaleRecords.GetSaleRecord.GetSaleRecordResponse>
         {
             Success = true,
             Message = "SaleRecord retrieved successfully",
-            Data = _mapper.Map<GetSaleRecordResponse>(response)
+            Data = _mapper.Map<SaleRecords.GetSaleRecord.GetSaleRecordResponse>(response)
         });
     }
 
@@ -116,5 +119,19 @@ public class SaleRecordController : BaseController
             Success = true,
             Message = "SaleRecord deleted successfully"
         });
+    }
+    [HttpPut("{id}/cancel")]
+    public async Task<IActionResult> UpdateStatus(Guid id, CancellationToken cancellationToken)
+    {
+        Console.WriteLine($"[DEBUG] ID recebido: {id}");
+        try
+        {
+            await _mediator.Send(new UpdateSaleRecordStatusCommand(id, SaleStatus.Canceled), cancellationToken);
+            return NoContent();
+        }
+        catch (NotFoundException)
+        {
+            return NotFound(new { Message = $"SaleRecord {id} not found." });
+        }
     }
 }

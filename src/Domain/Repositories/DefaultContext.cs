@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
-namespace ORM;
+namespace Domain.Repositories;
 
 public class DefaultContext : DbContext
 {

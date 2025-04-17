@@ -1,3 +1,4 @@
+using Application.SaleRecords.GetSaleRecord;
 using AutoMapper;
 
 namespace WebApi.Features.SaleRecords.GetSaleRecord;
@@ -14,5 +15,7 @@ public class GetSaleRecordProfile : Profile
     {
         CreateMap<Guid, Application.SaleRecords.GetSaleRecord.GetSaleRecordCommand>()
             .ConstructUsing(id => new Application.SaleRecords.GetSaleRecord.GetSaleRecordCommand(id));
+            CreateMap<GetSaleRecordResult, GetSaleRecordResponse>();
+
     }
 }

@@ -1,9 +1,6 @@
 ﻿using Domain.Repositories;
-using ORM;
-using ORM.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IoC.ModuleInitializers;

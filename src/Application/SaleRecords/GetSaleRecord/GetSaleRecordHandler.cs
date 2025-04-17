@@ -10,20 +10,20 @@ namespace Application.SaleRecords.GetSaleRecord;
 /// </summary>
 public class GetSaleRecordHandler : IRequestHandler<GetSaleRecordCommand, GetSaleRecordResult>
 {
-    private readonly ISaleRecordRepository _userRepository;
+    private readonly ISaleRecordRepository _salerecordRepository;
     private readonly IMapper _mapper;
 
     /// <summary>
     /// Initializes a new instance of GetSaleRecordHandler
     /// </summary>
-    /// <param name="userRepository">The user repository</param>
+    /// <param name="salerecordRepository">The salerecord repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
     /// <param name="validator">The validator for GetSaleRecordCommand</param>
     public GetSaleRecordHandler(
-        ISaleRecordRepository userRepository,
+        ISaleRecordRepository salerecordRepository,
         IMapper mapper)
     {
-        _userRepository = userRepository;
+        _salerecordRepository = salerecordRepository;
         _mapper = mapper;
     }
 
@@ -32,7 +32,7 @@ public class GetSaleRecordHandler : IRequestHandler<GetSaleRecordCommand, GetSal
     /// </summary>
     /// <param name="request">The GetSaleRecord command</param>
     /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The user details if found</returns>
+    /// <returns>The salerecord details if found</returns>
     public async Task<GetSaleRecordResult> Handle(GetSaleRecordCommand request, CancellationToken cancellationToken)
     {
         var validator = new GetSaleRecordValidator();
@@ -41,10 +41,10 @@ public class GetSaleRecordHandler : IRequestHandler<GetSaleRecordCommand, GetSal
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var user = await _userRepository.GetByIdAsync(request.Id, cancellationToken);
-        if (user == null)
+        var salerecord = await _salerecordRepository.GetByIdAsync(request.Id, cancellationToken);
+        if (salerecord == null)
             throw new KeyNotFoundException($"SaleRecord with ID {request.Id} not found");
 
-        return _mapper.Map<GetSaleRecordResult>(user);
+        return _mapper.Map<GetSaleRecordResult>(salerecord);
     }
 }

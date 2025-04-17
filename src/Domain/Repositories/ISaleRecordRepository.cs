@@ -38,4 +38,5 @@ public interface ISaleRecordRepository
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>True if the sale was deleted, false if not found</returns>
     Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<bool> UpdateAsync(SaleRecord salerecord, CancellationToken cancellationToken = default);
 }

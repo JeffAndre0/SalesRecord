@@ -126,5 +126,8 @@ public class SaleRecord : BaseEntity, ISaleRecord
         Status = SaleStatus.Canceled;
         UpdatedAt = DateTime.UtcNow;
     }
-
+    public void UpdateStatus(SaleStatus newStatus)
+    {
+        Status = newStatus;
+    }
 }

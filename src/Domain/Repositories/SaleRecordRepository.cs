@@ -2,7 +2,7 @@
 using Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace ORM.Repositories;
+namespace Domain.Repositories;
 
 /// <summary>
 /// Implementation of ISaleRecordRepository using Entity Framework Core
@@ -70,6 +70,17 @@ public class SaleRecordRepository : ISaleRecordRepository
             return false;
 
         _context.SaleRecords.Remove(salerecord);
+        await _context.SaveChangesAsync(cancellationToken);
+        return true;
+    }
+
+    public async Task<bool> UpdateAsync(SaleRecord saleRecord, CancellationToken cancellationToken = default)
+    {
+        var salerecord = await GetByIdAsync(saleRecord.Id, cancellationToken);
+        if (salerecord == null)
+            return false;
+
+        _context.SaleRecords.Update(salerecord);
         await _context.SaveChangesAsync(cancellationToken);
         return true;
     }
