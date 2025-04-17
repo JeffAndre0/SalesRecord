@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Domain.Common;
 
 namespace Domain.Entities;
@@ -15,7 +16,7 @@ public class Cart : BaseEntity
     public decimal Discount { get; set; }
     public decimal TotalAmount { get; set; }
     public Guid SaleRecordId { get; set; }
-
+    [JsonIgnore]
     public SaleRecord SaleRecord { get; set; }
 
 }

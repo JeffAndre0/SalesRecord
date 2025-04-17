@@ -14,11 +14,6 @@ public class CreateSaleRecordProfile : Profile
     /// </summary>
     public CreateSaleRecordProfile()
     {
-        // CreateMap<CreateSaleRecordCommand, SaleRecord>();
-        // CreateMap<SaleRecord, CreateSaleRecordResult>();
-
-        // CreateMap<Cart, CreateCartResult>();
-        
 
         CreateMap<SaleRecord, CreateSaleRecordResult>();
         CreateMap<Cart, CreateCartResult>();
@@ -27,5 +22,8 @@ public class CreateSaleRecordProfile : Profile
         CreateMap<CreateCartResult, CreateCartResult>();
         CreateMap<CreateSaleRecordResult, CreateSaleRecordResponse>();
         CreateMap<CreateCartResult, CreateCartResponse>();
+        CreateMap<SaleRecord, CreateSaleRecordResponse>()
+        .ForMember(dest => dest.Cart, opt => opt.MapFrom(src => src.Cart));
+
     }
 }

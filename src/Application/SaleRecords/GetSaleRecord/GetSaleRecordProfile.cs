@@ -1,3 +1,4 @@
+using Application.Features.SaleRecords.CreateSaleRecord;
 using AutoMapper;
 using Domain.Entities;
 
@@ -13,8 +14,17 @@ public class GetSaleRecordProfile : Profile
     /// </summary>
     public GetSaleRecordProfile()
     {
-        CreateMap<SaleRecord, GetSaleRecordResult>();
         CreateMap<GetSaleRecordResult, GetSaleRecordResponse>();
+        CreateMap<SaleRecord, CreateSaleRecordResponse>()
+        .ForMember(dest => dest.Cart, opt => opt.MapFrom(src => src.Cart));
 
+        CreateMap<Cart, CartItemResponse>();
+        CreateMap<SaleRecord, GetSaleRecordResult>()
+            .ForMember(dest => dest.Cart, opt => opt.MapFrom(src => src.Cart));
+
+        CreateMap<GetSaleRecordResult, GetSaleRecordResponse>()
+            .ForMember(dest => dest.Cart, opt => opt.MapFrom(src => src.Cart));
+
+            
     }
 }

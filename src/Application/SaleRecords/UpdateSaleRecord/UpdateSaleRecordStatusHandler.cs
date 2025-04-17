@@ -20,17 +20,13 @@ public class UpdateSaleRecordStatusCommandHandler : IRequestHandler<UpdateSaleRe
     }
     public async Task<Unit> Handle(UpdateSaleRecordStatusCommand request, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"[DEBUG] ID recebido PT 2: {request.SaleRecordId}");
 
         var salerecord = await _salerecordRepository.GetByIdAsync(request.SaleRecordId, cancellationToken);
         if (salerecord == null){
-            Console.WriteLine($"[DEBUG] ID recebido PT 3: {request.SaleRecordId}");
             throw new KeyNotFoundException($"SaleRecord with ID {request.SaleRecordId} not found");
         }
-        Console.WriteLine($"[DEBUG] ID recebido PT 4: {request.SaleRecordId}");
 
         salerecord.Status = request.NewStatus;
-        Console.WriteLine($"[DEBUG] ID recebido PT 5: {request.SaleRecordId}");
 
         await _salerecordRepository.UpdateAsync(salerecord, cancellationToken);
 

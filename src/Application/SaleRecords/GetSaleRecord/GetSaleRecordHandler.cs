@@ -2,6 +2,7 @@ using AutoMapper;
 using MediatR;
 using FluentValidation;
 using Domain.Repositories;
+using Domain.Entities;
 
 namespace Application.SaleRecords.GetSaleRecord;
 
@@ -42,6 +43,9 @@ public class GetSaleRecordHandler : IRequestHandler<GetSaleRecordCommand, GetSal
             throw new ValidationException(validationResult.Errors);
 
         var salerecord = await _salerecordRepository.GetByIdAsync(request.Id, cancellationToken);
+        Console.WriteLine($"[DEBUG] ID recebido: {salerecord}");
+        Console.WriteLine($"[DEBUG] ID recebido: {salerecord.Cart}");
+
         if (salerecord == null)
             throw new KeyNotFoundException($"SaleRecord with ID {request.Id} not found");
 

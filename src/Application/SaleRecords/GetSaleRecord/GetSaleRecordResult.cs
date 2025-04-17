@@ -18,7 +18,7 @@ public class GetSaleRecordResult
 
     public string Branch { get; set; } = string.Empty;
 
-    public Cart Cart { get; set; } = new Cart();
+    public List<Cart> Cart { get; set; } = new();
 
     public SaleStatus Status { get; set; } = SaleStatus.Active;
 }

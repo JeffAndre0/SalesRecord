@@ -1,5 +1,6 @@
 using Application.SaleRecords.GetSaleRecord;
 using AutoMapper;
+using Domain.Entities;
 
 namespace WebApi.Features.SaleRecords.GetSaleRecord;
 
@@ -13,9 +14,12 @@ public class GetSaleRecordProfile : Profile
     /// </summary>
     public GetSaleRecordProfile()
     {
-        CreateMap<Guid, Application.SaleRecords.GetSaleRecord.GetSaleRecordCommand>()
-            .ConstructUsing(id => new Application.SaleRecords.GetSaleRecord.GetSaleRecordCommand(id));
-            CreateMap<GetSaleRecordResult, GetSaleRecordResponse>();
+        CreateMap<Guid, GetSaleRecordCommand>()
+            .ConstructUsing(id => new GetSaleRecordCommand(id));
+        CreateMap<GetSaleRecordResult, GetSaleRecordResponse>();
+        CreateMap<Cart, CartItemResponse>();
 
+        CreateMap<GetSaleRecordResult, GetSaleRecordResponse>()
+            .ForMember(dest => dest.Cart, opt => opt.MapFrom(src => src.Cart));
     }
 }

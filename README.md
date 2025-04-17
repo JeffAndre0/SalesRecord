@@ -27,6 +27,7 @@ This project is an API implementation for managing sales records in a retail sto
   - `POST /api/salerecords`: Create a new sale record.
   - `GET /api/salerecords/{id}`: Retrieve a sale record by ID.
   - `DELETE /api/salerecords/{id}`: Delete a sale record.
+  - `PUT /api/salerecords/{id}/cancel`: Update Sale status to Cancel.
 
 ## How to Run the Project
 

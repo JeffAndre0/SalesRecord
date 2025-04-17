@@ -123,7 +123,6 @@ public class SaleRecordController : BaseController
     [HttpPut("{id}/cancel")]
     public async Task<IActionResult> UpdateStatus(Guid id, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"[DEBUG] ID recebido: {id}");
         try
         {
             await _mediator.Send(new UpdateSaleRecordStatusCommand(id, SaleStatus.Canceled), cancellationToken);

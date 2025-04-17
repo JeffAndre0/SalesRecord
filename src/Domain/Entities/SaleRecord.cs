@@ -42,7 +42,7 @@ public class SaleRecord : BaseEntity, ISaleRecord
     /// Gets the salerecord's role in the system.
     /// Determines the salerecord's permissions and access levels.
     /// </summary>
-    public List<Cart> Cart { get; set; }
+    public List<Cart> Cart { get; set; } = new();
 
     /// <summary>
     /// Gets the date and time when the salerecord was created.

@@ -41,7 +41,7 @@ public class SaleRecordRepository : ISaleRecordRepository
     /// <returns>The salerecord if found, null otherwise</returns>
     public async Task<SaleRecord?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.SaleRecords.FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
+        return await _context.SaleRecords.Include(sr => sr.Cart).FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
     }
 
     /// <summary>
